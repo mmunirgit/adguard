@@ -1,0 +1,22 @@
+---
+version: "2"
+services:
+  adguardhome:
+    image: adguard/adguardhome
+    container_name: adguardhome
+    ports:
+      - 53:53/tcp
+      - 53:53/udp
+      - 67:67/udp
+      - 68:68/tcp
+      - 68:68/udp
+      - 853:853/tcp
+      - 3000:3000/tcp
+    environment:
+      - USER_id=1000
+      - GROUP_id=1000
+      - TZ=US/Eastern
+    volumes:
+      - /var/lib/adguard/work:/opt/adguardhome/work
+      - /var/lib/adguard/conf:/opt/adguardhome/conf
+    restart: unless-stopped
